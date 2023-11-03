@@ -1,0 +1,25 @@
+.movie-card{
+    border: none !important;
+    margin-bottom: 1.5rem;
+    
+    img{
+        object-fit: cover;
+        height: 22rem !important;
+    }
+
+    .movie-card-title{
+        font-size: 1.25rem;
+
+        small{
+            background-color: #0b758a;
+            color: #fff;
+            padding: 2px 6px;
+        }
+
+    }
+
+    .movie-card-desc{
+        font-size: 0.925rem;
+    }
+
+}
