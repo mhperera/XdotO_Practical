@@ -3,9 +3,9 @@ import classes from './Footer.module.scss';
 
 const Footer = () => {
   return (
-   <footer className={classes['footer']}>
-        Movies &copy; 2023
-   </footer>
+    <footer className={classes['footer']}>
+      Movies &copy; 2023
+    </footer>
   )
 }
 

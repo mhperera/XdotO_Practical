@@ -11,7 +11,7 @@ import './App.css';
 const Layout = () => {
   return (
     <div className="app">
-      <Navbar/>
+      <Navbar />
       <Outlet />
       <Footer />
     </div>
@@ -21,11 +21,11 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: "/",
-        element: <Home/>
+        element: <Home />
       }
     ]
   }
