@@ -1,6 +1,7 @@
 import React from 'react'
 import Wrapper from '../../components/Wrapper/Wrapper';
 import PlayList from './../../components/PlayList/PlayList';
+import Loading from '../../components/Loading/Loading';
 import { json, useNavigation, useLoaderData } from 'react-router-dom';
 
 const Movies = () => {
@@ -13,7 +14,7 @@ const Movies = () => {
     <>
       {
         navigation.state === 'loading' ?
-          <p>Loading...</p> :
+          <p><Loading /></p> :
           (
             <Wrapper>
               <PlayList data={data} />
@@ -35,7 +36,9 @@ export const loader = async () => {
       status: 500
     });
   } else {
-    return response;
+    // setTimeout(()=>{
+      return response;
+    // }, 0)
   }
 
 }

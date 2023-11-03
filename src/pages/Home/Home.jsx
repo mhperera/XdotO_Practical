@@ -2,6 +2,7 @@ import React from 'react'
 import Slider from '../../components/Slider/Slider'
 import Wrapper from './../../components/Wrapper/Wrapper';
 import PlayList from '../../components/PlayList/PlayList';
+import Loading from '../../components/Loading/Loading';
 import { json, useNavigation, useLoaderData } from 'react-router-dom';
 
 const Home = () => {
@@ -18,13 +19,12 @@ const Home = () => {
         <h3>New Movies</h3>
         {
           navigation.state === 'loading' ?
-            <p>Loading...</p> :
+            <p><Loading /></p> :
             (
               <PlayList data={data} />
             )
         }
       </Wrapper>
-
       {/* Top 10 */}
 
     </>

@@ -5,7 +5,7 @@ import classes from './Thumbnail.module.scss';
 const Thumbnail = ({ title, imdbID, poster, release, type }) => {
   return (
     <>
-      <Card className={`col-sm-2 col-md-3 col-lg-3 ${classes['movie-card']}`}>
+      <Card className={`col-sm-6 col-md-4 col-lg-4 col-xl-3 ${classes['movie-card']}`}>
         <Card.Img variant="top" src={poster} />
         <Card.Body>
           <Card.Title className={classes['movie-card-title']}><small>{release}</small> {title} </Card.Title>
