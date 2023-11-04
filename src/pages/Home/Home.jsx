@@ -19,7 +19,7 @@ const Home = () => {
         <h3>New Movies</h3>
         {
           navigation.state === 'loading' ?
-            <p><Loading /></p> :
+            <Loading /> :
             (
               <PlayList data={data} />
             )

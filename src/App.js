@@ -4,6 +4,9 @@ import {
   RouterProvider,
   Outlet
 } from 'react-router-dom';
+import { Provider } from "react-redux";
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import Footer from './components/Footer/Footer';
 import Home, { loader as HomeLoader } from './pages/Home/Home';
 import Movies, { loader as MoviesLoader } from './pages/Movies/Movies';
@@ -43,9 +46,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router}>
-
-    </RouterProvider>
+    <Provider store={store}>
+      <PersistGate loading={"loading"} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
   );
 }
 
