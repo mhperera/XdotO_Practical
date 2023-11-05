@@ -13,6 +13,7 @@ export async function fetchData(url, options = {}) {
 		}
 
 		const contentType = response.headers.get('content-type');
+
 		if (contentType && contentType.includes('application/json')) {
 			const data = await response.json();
 			if (data && typeof data === 'object') {
