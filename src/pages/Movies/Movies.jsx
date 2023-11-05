@@ -26,6 +26,7 @@ const Movies = () => {
 		setSortKey(sortKey_);
 		setSearchKey(searchKey_);
 		setPageNum(1);
+		setData([]);
 	}
 
 	// generate api url
@@ -35,7 +36,6 @@ const Movies = () => {
 		if (searchKey !== "") {
 			url += `q=${searchKey}&`
 		}
-
 		if (sortKey !== 'none') {
 			if (sortKey === 'latest') {
 				url += `_sort=release&_order=desc&`
@@ -50,15 +50,11 @@ const Movies = () => {
 				url += `_sort=rating.rate&_order=asc&`
 			}
 		}
-
 		if (filterKey !== 'all') {
 			url += `type=${filterKey}&`
 		}
-
 		url += `_page=${pageNum}&_limit=${ITEMS_PER_PAGE}&`;
-
 		fetchPlays(url);
-
 	}, [filterKey, sortKey, searchKey, pageNum]);
 
 	// fetch data
@@ -95,11 +91,9 @@ const Movies = () => {
 	useEffect(() => {
 		const currentElement = lastElement;
 		const currentObserver = observer.current;
-
 		if (currentElement) {
 			currentObserver.observe(currentElement);
 		}
-
 		return () => {
 			if (currentElement) {
 				currentObserver.unobserve(currentElement);
@@ -109,15 +103,12 @@ const Movies = () => {
 
 	// debounced filter
 	useEffect(() => {
-
 		const timer = setTimeout(() => {
 			handleFilter(filterKey, sortKey, searchKey);
 		}, 500);
-
 		return () => {
 			clearTimeout(timer)
 		}
-
 	}, [filterKey, sortKey, searchKey, handleFilter, pageNum]);
 
 	return (
@@ -125,7 +116,6 @@ const Movies = () => {
 			{
 				error && <ErrorAlert message={error} />
 			}
-			
 			<Filters className='pb-0'
 				onFilter={setKeys}
 				filterKey={filterKey}
