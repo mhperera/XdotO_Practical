@@ -1,8 +1,9 @@
 import React from 'react'
 import Slider from '../../components/Slider/Slider'
 import Wrapper from './../../components/Wrapper/Wrapper';
-import PlayList from '../../components/PlayList/PlayList';
+import Thumbnail from '../../components/Thumbnail/Thumbnail';
 import Loading from '../../components/Loading/Loading';
+import { Row } from 'react-bootstrap';
 import { fetchData } from './../../utility/http'
 import { json, useNavigation, useLoaderData } from 'react-router-dom';
 
@@ -22,7 +23,38 @@ const Home = () => {
 					navigation.state === 'loading' ?
 						<Loading /> :
 						(
-							<PlayList data={data} />
+							<Wrapper>
+
+								<Row>
+									{/* PlayList data={data} /> */}
+
+									{
+
+										data.length > 0 ?
+										(
+											data.map(item => (
+												<div
+													className='col-sm-6 col-md-4 col-lg-4 col-3 col-xl-2'
+													key={item.imdbID}
+												>
+													<Thumbnail
+														imdbID={item.imdbID}
+														title={item.title}
+														release={item.release}
+														type={item.type}
+														poster={item.poster}
+														desc={item.desc}
+														rating={item.rating}
+													/>
+												</div>
+											))
+										) : 'No data'
+										
+									}
+
+								</Row>
+			
+							</Wrapper>	
 						)
 				}
 			</Wrapper>
@@ -41,25 +73,17 @@ export const loader = async () => {
 
 	const url = `/plays?type=movie&_sort=release&release=${thisYear.toString()}&_order=desc&_limit=10`;
 	
-	// fetchData(url, {}).then((data) => {
-	// 	if (data) {
-	// 		return data;
-	// 	}
-	// }).catch((error) => {
-	// 	throw json({
-	// 		message: 'Could not fetch items',
-	// 		status: 500
-	// 	});
-	// });
+	let data = await fetchData(url, {}).then((data) => {
+					if (data) {
+						return data;
+					}
+				}).catch((error) => {
+					throw json({
+						message: 'Could not fetch items',
+						status: 500
+					});
+				});
 
-	const response = await fetch(`${process.env.REACT_APP_API_URL}/plays/?type=movie&_sort=release&release=${thisYear.toString()}&_order=desc&_limit=10`);
-	if (!response.ok) {
-	  throw json({
-	    message: 'Could not fetch items',
-	    status: 500
-	  });
-	} else {
-	  	return await response.json();
-	}
+	return data;
 
 }
