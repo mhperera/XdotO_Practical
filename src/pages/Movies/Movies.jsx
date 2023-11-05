@@ -26,6 +26,7 @@ const Movies = () => {
 		setSortKey(sortKey_);
 		setSearchKey(searchKey_);
 		setPageNum(1);
+		setData([]);
 	}
 
 	// generate api url
@@ -56,7 +57,7 @@ const Movies = () => {
 		}
 
 		url += `_page=${pageNum}&_limit=${ITEMS_PER_PAGE}&`;
-
+		
 		fetchPlays(url);
 
 	}, [filterKey, sortKey, searchKey, pageNum]);
@@ -109,15 +110,12 @@ const Movies = () => {
 
 	// debounced filter
 	useEffect(() => {
-
 		const timer = setTimeout(() => {
 			handleFilter(filterKey, sortKey, searchKey);
 		}, 500);
-
 		return () => {
 			clearTimeout(timer)
 		}
-
 	}, [filterKey, sortKey, searchKey, handleFilter, pageNum]);
 
 	return (
