@@ -9,7 +9,7 @@ import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import Loading from './components/Loading/Loading';
 import Footer from './components/Footer/Footer';
-import Home, { loader as HomeLoader } from './pages/Home/Home';
+import Home from './pages/Home/Home';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Navbar from './components/NavigationBar/NavigationBar';
 import './App.css';
@@ -34,7 +34,6 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: HomeLoader,
         element: <Home />
       },
       {
