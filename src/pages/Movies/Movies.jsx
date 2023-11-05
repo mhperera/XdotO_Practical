@@ -4,6 +4,7 @@ import Filters from '../../components/Filters/Filters';
 import { fetchData } from './../../utility/http';
 import Thumbnail from './../../components/Thumbnail/Thumbnail';
 import Row from 'react-bootstrap/Row';
+import Loading from '../../components/Loading/Loading';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -126,12 +127,17 @@ const Movies = () => {
 				searchKey={searchKey}
 			/>
 			<Wrapper>
-				{/* <PlayList data={data} /> */}
 
 				<Row>
 					{
 
-						data.length > 0 ?
+						loading ?
+
+						<Loading />
+						:
+
+						(
+							data.length > 0 ?
 							(
 								data.map(item => (
 									<div
@@ -151,6 +157,7 @@ const Movies = () => {
 									</div>
 								))
 							) : 'No data'
+						)
 
 					}
 				</Row>
