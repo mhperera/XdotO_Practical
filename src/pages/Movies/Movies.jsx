@@ -10,12 +10,12 @@ const ITEMS_PER_PAGE = 10;
 
 const Movies = () => {
 
+	const [loading, setLoading] = useState(true);
+	const [pageNum, setPageNum] = useState(1);
 	const [data, setData] = useState([]);
 	const [filterKey, setFilterKey] = useState('all');
 	const [sortKey, setSortKey] = useState('latest');
 	const [searchKey, setSearchKey] = useState('');
-	const [loading, setLoading] = useState(true);
-	const [pageNum, setPageNum] = useState(1);
 	const [lastElement, setLastElement] = useState(null);
 
 	// set sort, filter, search keys
@@ -27,7 +27,7 @@ const Movies = () => {
 	}
 
 	// generate api url
-	const handleFilter = useCallback(async (filterKey = 'all', sortKey = 'latest', searchKey = '') => {
+	const handleFilter = useCallback((filterKey = 'all', sortKey = 'latest', searchKey = '') => {
 
 		let url = '/plays?'
 		if (searchKey !== "") {
@@ -71,43 +71,43 @@ const Movies = () => {
 			}
 		}).catch((error) => {
 			console.error('Request failed:', error);
-			// Handle the error
 		});
 		setLoading(false);
 	}
 
 	// set observer
 	const observer = useRef(
-        new IntersectionObserver(
-            (entries) => {
-                const first = entries[0];
-                if (first.isIntersecting) {
-                    setPageNum((no) => {
+		new IntersectionObserver(
+			(entries) => {
+				const first = entries[0];
+				if (first.isIntersecting) {
+					setPageNum((no) => {
 						console.log('no => ', no);
 						return no + 1
 					});
-                }
-            })
-    );
+				}
+			}
+		)
+	);
 
 	useEffect(() => {
-        const currentElement = lastElement;
-        const currentObserver = observer.current;
+		const currentElement = lastElement;
+		const currentObserver = observer.current;
 
-        if (currentElement) {
-            currentObserver.observe(currentElement);
-        }
+		if (currentElement) {
+			currentObserver.observe(currentElement);
+		}
 
-        return () => {
-            if (currentElement) {
-                currentObserver.unobserve(currentElement);
-            }
-        };
-    }, [lastElement]);
+		return () => {
+			if (currentElement) {
+				currentObserver.unobserve(currentElement);
+			}
+		};
+	}, [lastElement]);
 
 	// debounced filter
 	useEffect(() => {
-		
+
 		const timer = setTimeout(() => {
 			handleFilter(filterKey, sortKey, searchKey);
 		}, 500);
@@ -127,15 +127,10 @@ const Movies = () => {
 				searchKey={searchKey}
 			/>
 			<Wrapper>
-
 				<Row>
 					{
-
 						loading ?
-
-						<Loading />
-						:
-
+						<Loading /> :
 						(
 							data.length > 0 ?
 							(
@@ -158,10 +153,8 @@ const Movies = () => {
 								))
 							) : 'No data'
 						)
-
 					}
 				</Row>
-			
 			</Wrapper>
 		</>
 	)
