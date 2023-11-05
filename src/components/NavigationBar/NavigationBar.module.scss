@@ -1,5 +1,51 @@
 .navigation-bar{
+
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+
     a{
         color: #fff !important;
     }
+
+    .badge-wrapper{
+        position: relative;
+    }
+
+    .badge{
+        position: absolute;
+        background: #c80101;
+        color: #fff;
+        padding: 3px 13px;
+        border-radius: 50%;
+        right: -31px;
+        top: -15px;
+        font-size: 15px;
+        font-weight: bold;
+        height: 33px;
+        width: fit-content;
+    }
+
+    $x-large-screen: 1200px;
+
+    // Media query mixins for convenience
+    // @mixin small-screen {
+    //     @media (max-width: $small-screen) {
+    //         @content;
+    //     }
+    // }
+
+    * {
+        // position: absolute;
+        // background: #c80101;
+        // color: #fff;
+        // padding: 3px 13px;
+        // border-radius: 50%;
+        // top: -15px;
+        // font-size: 15px;
+        // font-weight: bold;
+        // height: 33px;
+        // width: fit-content;
+        // left: 20px;
+    }
+
 }
