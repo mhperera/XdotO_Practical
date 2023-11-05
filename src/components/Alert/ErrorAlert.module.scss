@@ -1,0 +1,14 @@
+.alert{
+  width: 35rem;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-weight: 500;
+  float: right;
+  margin: 0;
+  position: absolute !important;
+  top: 80px;
+  right: 20px;
+  z-index: 5;
+  transition: all 0.3s ease;
+  text-align: center;
+}
