@@ -9,7 +9,7 @@ export async function fetchData(url, options = {}) {
 		const response = await fetch(`${process.env.REACT_APP_API_URL + url}`, { ...headers });
 
 		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
+			throw new Error(`HTTP error!`); // 404
 		}
 
 		const contentType = response.headers.get('content-type');

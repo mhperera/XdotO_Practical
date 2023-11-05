@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import Wrapper from '../../components/Wrapper/Wrapper';
 import Filters from '../../components/Filters/Filters';
+import ErrorAlert from '../../components/Alert/ErrorAlert';
 import { fetchData } from './../../utility/http';
 import Thumbnail from './../../components/Thumbnail/Thumbnail';
 import Row from 'react-bootstrap/Row';
@@ -10,6 +11,7 @@ const ITEMS_PER_PAGE = 10;
 
 const Movies = () => {
 
+	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [pageNum, setPageNum] = useState(1);
 	const [data, setData] = useState([]);
@@ -67,9 +69,10 @@ const Movies = () => {
 				let all = new Set([...data, ...datas]);
 				setData([...all]);
 			} else {
-				// ERROR
+				setError('Could not fetch data')
 			}
 		}).catch((error) => {
+			setError(error.message)
 			console.error('Request failed:', error);
 		});
 		setLoading(false);
@@ -82,7 +85,6 @@ const Movies = () => {
 				const first = entries[0];
 				if (first.isIntersecting) {
 					setPageNum((no) => {
-						console.log('no => ', no);
 						return no + 1
 					});
 				}
@@ -120,6 +122,10 @@ const Movies = () => {
 
 	return (
 		<>
+			{
+				error && <ErrorAlert message={error} />
+			}
+			
 			<Filters className='pb-0'
 				onFilter={setKeys}
 				filterKey={filterKey}
@@ -151,7 +157,7 @@ const Movies = () => {
 										/>
 									</div>
 								))
-							) : 'No data'
+							) : <div className='full-height'>No data</div>
 						)
 					}
 				</Row>
