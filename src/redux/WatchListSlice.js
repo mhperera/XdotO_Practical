@@ -13,7 +13,7 @@ const watchListSlice = createSlice({
             state.shows.push(action.payload);    
         },
         removeFromWatchList: (state, action)=>{
-            state.shows = state.shows.filter(show => show!==action.payload);
+            state.shows = state.shows.filter(show => show.imdbID!==action.payload);
         },
         resetWatchList: (state)=>{
             return initialState;
