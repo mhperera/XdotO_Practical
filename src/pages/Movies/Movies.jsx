@@ -132,7 +132,7 @@ const Movies = () => {
 							(
 								data.map(item => (
 									<div
-										className='col-sm-6 col-md-4 col-lg-4 col-3 col-xl-2'
+										className='col-12 col-sm-6 col-md-4 col-lg-4 col-3 col-xl-2'
 										ref={setLastElement}
 										key={item.imdbID}
 									>
