@@ -27,8 +27,8 @@ const NavigationBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavLink to="/" className='my-3'>Home</NavLink>
-              <NavLink to="/movies" className='my-3'>Movies</NavLink>
+              <NavLink to="/" className='mx-3'>Home</NavLink>
+              <NavLink to="/movies" className='mx-3'>Movies</NavLink>
             </Nav>
             <div className={classes['badge-wrapper']}>
               <BookmarksIcon className='text-white' onClick={openWatchList} style={{float: 'right'}}/>
