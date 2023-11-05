@@ -19,6 +19,8 @@ const Movies = () => {
 
   const handleFilter = useCallback(async (filterKey = 'all', sortKey = 'latest', searchKey = '') => {
 
+    console.log(filterKey, sortKey, searchKey);
+
     let url = '/plays?'
     if (searchKey !== "") {
       url += `q=${searchKey}&`
@@ -56,8 +58,9 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
+
     const timer = setTimeout(() => {
-      handleFilter();
+      handleFilter(filterKey, sortKey, searchKey);
     }, 500);
 
     return ()=>{

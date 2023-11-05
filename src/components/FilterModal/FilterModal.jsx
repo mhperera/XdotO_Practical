@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import classes from './FilterModal.module.scss';
 
+
 const FilterModal = ({ show, onHide, defaultSortKey ,defaultFilterKey }) => {
 
   const [sortKey, setSortKey] = useState(defaultSortKey);

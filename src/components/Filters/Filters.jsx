@@ -7,11 +7,13 @@ import Form from 'react-bootstrap/Form';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import FilterModal from '../FilterModal/FilterModal';
 
+
 const Filters = ({onFilter, filterKey, sortKey, searchKey}) => {
 
     const [showFilterModal, setShowFilterModal] = useState(false);
 
     const handleKeys = (filterKey_, sortKey_) => {
+        setShowFilterModal(false)
         onFilter(filterKey_, sortKey_, searchKey);
     }
 
