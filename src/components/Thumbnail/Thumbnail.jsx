@@ -10,6 +10,8 @@ import { addToWatchList, removeFromWatchList } from './../../redux/WatchListSlic
 
 const Thumbnail = ({ title, imdbID, poster, release, type, desc, rating, ref }) => {
 
+  const itemObject = { title, imdbID, poster, release, type, desc, rating };
+
   const thisYear = new Date().getFullYear();
 
   const [isInWatchList, setIsInWatchList] = useState(false);
@@ -19,50 +21,54 @@ const Thumbnail = ({ title, imdbID, poster, release, type, desc, rating, ref }) 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsInWatchList(watchList.includes(imdbID) ? true : false);
+    // setIsInWatchList(watchList.includes(imdbID) ? true : false);
+    const filteredArray = watchList.filter(item => item.imdbID === imdbID);
+    setIsInWatchList(filteredArray.length > 0 ? true : false);
   }, [watchList, imdbID])
 
   const handleWatchList = () => {
-    dispatch(isInWatchList ? removeFromWatchList(imdbID) : addToWatchList(imdbID));
+    dispatch(isInWatchList ? removeFromWatchList(imdbID) : addToWatchList(itemObject));
   }
 
   return (
-      <Card className={`${classes['movie-card']}`} ref={ref}>
+    <Card className={`${classes['movie-card']}`} ref={ref}>
 
-        <WatchListIcon isInWatchList={isInWatchList} onClick={handleWatchList} />
+      <WatchListIcon isInWatchList={isInWatchList} onClick={handleWatchList} />
 
-        <Link to='/'>
+      <Link to='/'>
 
-          <div className={`${classes['card-img-wrapper']}`} >
-            
-            {
-              release === thisYear.toString() && 
-              <Badge bg="secondary" className={`${classes['badge']}`}>New</Badge>
-            }
+        <div className={`${classes['card-img-wrapper']}`} >
 
-            <Card.Img variant="top" src={poster} />
+          {
+            release === thisYear.toString() &&
+            <Badge bg="secondary" className={`${classes['badge']}`}>New</Badge>
+          }
 
-            <div className={`${classes['overlay']}`}></div>
+          <Card.Img variant="top" src={poster} />
 
-          </div>
+          <div className={`${classes['overlay']}`}></div>
 
-          <Card.Body className='px-0 py-2'>
+        </div>
 
-            <Badge bg="secondary" className={`mb-2 ${classes['tag']}`}><small>{release}</small></Badge>
+        <Card.Body className='px-0 py-2'>
 
-            <Ratings rating={rating}/>
+          <Badge bg="secondary" className={`mb-2 ${classes['tag']}`}><small>{release}</small></Badge>
 
-            <Card.Title className={classes['movie-card-title']}>{title}</Card.Title>
+          <Badge bg="warning" className={`mb-2 ${classes['tag']}`}><small>{type}</small></Badge>
 
-            <Card.Text className={classes['movie-card-desc']}>
-              { `${desc.slice(0, 30)}...` }
-            </Card.Text>
+          <Ratings rating={rating} />
 
-          </Card.Body>
+          <Card.Title className={classes['movie-card-title']}>{title}</Card.Title>
 
-        </Link>
+          <Card.Text className={classes['movie-card-desc']}>
+            {`${desc.slice(0, 30)}...`}
+          </Card.Text>
 
-      </Card>
+        </Card.Body>
+
+      </Link>
+
+    </Card>
   )
 }
 
