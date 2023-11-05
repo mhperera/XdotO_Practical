@@ -1,0 +1,9 @@
+.filter-modal{
+    input[type="radio"]{
+        background: #c7c7c7;
+    }
+
+    input[type="radio"]:checked{
+        background: #0d6efd
+    }
+}

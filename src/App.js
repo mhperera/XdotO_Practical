@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -7,12 +7,14 @@ import {
 import { Provider } from "react-redux";
 import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import Loading from './components/Loading/Loading';
 import Footer from './components/Footer/Footer';
 import Home, { loader as HomeLoader } from './pages/Home/Home';
-import Movies, { loader as MoviesLoader } from './pages/Movies/Movies';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Navbar from './components/NavigationBar/NavigationBar';
 import './App.css';
+// import Movies from './pages/Movies/Movies';
+const Movies = lazy( () => import('./pages/Movies/Movies') );
 
 const Layout = () => {
   return (
@@ -37,8 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/movies",
-        loader: MoviesLoader,
-        element: <Movies />
+        element: <Suspense fallback={<Loading/>}><Movies /></Suspense>
       }
     ]
   }

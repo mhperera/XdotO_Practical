@@ -14,7 +14,7 @@ const useFetch = (url) => {
 
 				setLoading(true);
 
-				const response = await fetch(`${process.env.REACT_APP_API_URL + url}`, {
+				const response = await fetch(`${process.env.REACT_APP_API_URL}/plays/${url}`, {
 					method: 'GET'
 				});
 

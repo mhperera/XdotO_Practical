@@ -1,15 +1,35 @@
 .movie-card{
+
     border: none !important;
     margin-bottom: 1.5rem;
+
+    a{
+        // color: #282828 !important;
+    }
     
     .card-img-wrapper{
 
         width: 100%;
         position: relative;
+        overflow: hidden;
 
         img{
             object-fit: cover;
-            height: 22rem !important;        
+            height: 22rem !important;    
+            transition: all 0.3s ease;    
+        }
+
+        .badge{
+            position: absolute;
+            right: -25px;
+            top: 5px;
+            font-size: 18px;
+            width: 130px;
+            border-radius: 0;
+            transform: rotate(30deg);
+            background: rgb(10,186,250) !important;
+            background: linear-gradient(21deg, rgba(10,186,250,1) 0%, rgba(6,98,179,1) 0%, rgba(16,168,199,1) 100%)!important; 
+            z-index: 1;
         }
     
         .overlay{
@@ -17,16 +37,31 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.15); /* Adjust the last value (0.5) for the desired opacity */
-            z-index: 0; /* Ensures the overlay is above the image */
+            background: rgb(0,0,0);
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.80) 100%); 
+            z-index: 0;
+            opacity: 0.7;
+            transition: all 2s ease; 
         }
 
     }
 
-    
+    .tag {
+        font-size: 0.95rem !important;
+        background-color: #878787 !important;
+        border-radius: 0.15rem;
+        padding: 4px 9px;
+        small{
+            color: #fff !important;
+        }
+    }
 
     .movie-card-title{
+
+        min-height: 55px;
         font-size: 1.25rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
 
         small{
             background-color: #0b758a;
@@ -38,6 +73,10 @@
 
     .movie-card-desc{
         font-size: 0.925rem;
+    }
+
+    &:hover .overlay{
+        opacity: 1;
     }
 
 }

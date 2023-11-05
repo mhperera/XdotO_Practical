@@ -10,7 +10,6 @@ const watchListSlice = createSlice({
     initialState,
     reducers: {
         addToWatchList: (state, action)=>{
-            console.log(action.payload, 'hit');
             state.shows.push(action.payload);    
         },
         removeFromWatchList: (state, action)=>{

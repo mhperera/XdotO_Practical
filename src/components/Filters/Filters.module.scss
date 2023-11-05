@@ -1,0 +1,12 @@
+.filters{
+    position: sticky;
+    top: 60px;
+    z-index: 3;
+    background: #fff;
+    
+    .column{
+        display: flex;
+        gap: 15px;
+    }
+
+}

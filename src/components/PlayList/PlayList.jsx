@@ -19,6 +19,8 @@ const PlayList = ({ data }) => {
 									release={item.release}
 									type={item.type}
 									poster={item.poster}
+									desc={item.desc}
+									rating={item.rating}
 								/>
 							))
 						) : 'No data'

@@ -35,7 +35,8 @@ export default Home;
 
 export const loader = async () => {
 
-  const response = await fetch(`${process.env.REACT_APP_API_URL}?type=movie&_sort=release&_order=desc&_limit=4`);
+  const thisYear = new Date().getFullYear();
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/plays/?type=movie&_sort=release&release=${thisYear.toString()}&_order=desc&_limit=10`);
   if (!response.ok) {
     throw json({
       message: 'Could not fetch items',
