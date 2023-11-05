@@ -54,6 +54,8 @@ const Thumbnail = ({ title, imdbID, poster, release, type, desc, rating, ref }) 
 
           <Badge bg="secondary" className={`mb-2 ${classes['tag']}`}><small>{release}</small></Badge>
 
+          <Badge bg="warning" className={`mb-2 ${classes['tag']}`}><small>{type}</small></Badge>
+
           <Ratings rating={rating} />
 
           <Card.Title className={classes['movie-card-title']}>{title}</Card.Title>
