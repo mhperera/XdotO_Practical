@@ -8,7 +8,7 @@ import { Badge } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWatchList, removeFromWatchList } from './../../redux/WatchListSlice';
 
-const Thumbnail = ({ title, imdbID, poster, release, type, desc, rating }) => {
+const Thumbnail = ({ title, imdbID, poster, release, type, desc, rating, ref }) => {
 
   const thisYear = new Date().getFullYear();
 
@@ -27,7 +27,7 @@ const Thumbnail = ({ title, imdbID, poster, release, type, desc, rating }) => {
   }
 
   return (
-      <Card className={`col-sm-6 col-md-4 col-lg-4 col-3 col-xl-2 ${classes['movie-card']}`}>
+      <Card className={`${classes['movie-card']}`} ref={ref}>
 
         <WatchListIcon isInWatchList={isInWatchList} onClick={handleWatchList} />
 
