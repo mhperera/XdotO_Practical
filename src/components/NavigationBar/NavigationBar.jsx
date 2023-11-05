@@ -1,4 +1,5 @@
 import React, {useState, Suspense} from 'react'
+import { useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import Container from 'react-bootstrap/Container';
@@ -6,9 +7,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import classes from './NavigationBar.module.scss';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 const WatchList = React.lazy(()=>import('../WatchList/WatchList'));
 
 const NavigationBar = () => {
+
+  const wishList = useSelector((state)=>state.watchList.shows)
+
   const [showWatchList, setShowWatchList] = useState(false);
   const openWatchList = () => {
     setShowWatchList((prevState) => !prevState);
@@ -21,13 +27,29 @@ const NavigationBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavLink to="/" className='mx-3'>Home</NavLink>
-              <NavLink to="/movies" className='mx-3'>Movies</NavLink>
+              <NavLink to="/" className='my-3'>Home</NavLink>
+              <NavLink to="/movies" className='my-3'>Movies</NavLink>
             </Nav>
+            <div className={classes['badge-wrapper']}>
+              <BookmarksIcon className='text-white' onClick={openWatchList} style={{float: 'right'}}/>
+              {
+                wishList.length > 0 && <span className={classes['badge']}>{wishList.length}</span>
+              }
+            </div>
+            {/* <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form> */}
           </Navbar.Collapse>
-          <BookmarksIcon className='text-white' onClick={openWatchList}/>
+          
         </Container>
       </Navbar>
+      
       { showWatchList && 
         <Suspense fallback={<Loading/>}>
           <WatchList 
